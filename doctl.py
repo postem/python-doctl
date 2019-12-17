@@ -1045,7 +1045,7 @@ class Projects:
         if not isinstance(project_ids, list):
             raise ValueError("Project ids must be a list")
         project_args = ['"{0}"'.format(project_id) for project_id in project_ids]
-        c = self.do.doctl("projects", "delete", *project_args, expect_json=False)
+        c = self.do.doctl("projects", "delete", *project_args, "--force", expect_json=False)
         return c.return_code == 0
 
     def get(self, project_id):
