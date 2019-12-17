@@ -197,8 +197,8 @@ class ComputeDroplet:
         if tags:
             if not isinstance(tags, list):
                 raise ValueError("Tags must be a list")
-            tag_args = ["--tag-names {0}".format(tag) for tag in tags]
-            args.extend(tag_args)
+            tag_args = ",".join(tags)
+            args.append("--tag-names {0}".format(tag_args))
         if enable_private_networking:
             args.extend(["--enable-private-networking"])
         if enable_monitoring:
