@@ -787,10 +787,9 @@ class ComputeSnapshot:
 
     def delete(self, snapshot_id):
         """Delete snapshots."""
-        c = self.do.doctl("compute", "size", "list", expect_json=False)
+        c = self.do.doctl("compute", "snapshot", "delete", snapshot_id, "--force", expect_json=False)
         return c.return_code == 0
-
-
+     
 class ComputeSSHKey:
     """Access ssh key commands"""
     def __init__(self, do):
@@ -889,7 +888,7 @@ class ComputeVolume:
         args.extend(["--snapshot-name", name])
         if description:
             args.extend(["--snapshot-desc", description])
-        return self.do.doctl("compute", "volume", "snapshot", volume_id, *args)
+        return self.do.doctl("compute", "volume", "snapshot", volume_id, *args, expect_json=False)
 
 
 class ComputeVolumeAction:
